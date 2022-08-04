@@ -1,0 +1,34 @@
+
+use ineuron;
+show databases;
+
+# create table
+create table if not exists fitbit(
+`Id` varchar(30),
+ActivityDate varchar(60),
+TotalSteps int,
+TotalDistance decimal(20,6),
+TrackerDistance decimal(20,6),
+LoggedActivitiesDistance decimal(20,6),
+VeryActiveDistance decimal(20,6),
+ModeratelyActiveDistance decimal(20,6),
+LightActiveDistance decimal(20,6),
+SedentaryActiveDistance decimal(20,6),
+VeryActiveMinutes decimal(20,6),
+FairlyActiveMinutes int,	
+LightlyActiveMinutes int,	
+SedentaryMinutes int,	
+Calories int);
+
+show tables;
+select * from fitbit;
+
+# load entire dataset 
+load data infile
+"C:/FitBit data.csv"
+into table fitbit
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 rows;
+
