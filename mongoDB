@@ -1,0 +1,337 @@
+
+
+------------------------------------------------------------------------------------
+import pymongo
+
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+db = client.test
+#print(db)
+# creating database
+database = client['employ_info2']
+
+data = {
+    "name" : "sushanta",
+    "mail_id" : "skpsushanta@gmail.com",
+    "subject" : ["data scinece" , "big data " , "data analytics "]
+}
+
+# table creation
+collection = database['employ1']
+
+
+# inset data to MongoDB cloud
+collection.insert_one(data)   # insert dict data
+
+list_of_records = [
+
+    {
+        'companyName' : 'TechnoApp software solutions',
+        'product' : 'Medical program',
+        'courses' : 'AI'
+    },
+    {
+        'companyName' : 'ineuron',
+        'product' : 'bachelor program',
+        'courses' : 'DS'
+    },
+    {
+        'companyName': 'ineuron',
+        'product': 'master degree',
+        'courses': 'Python'
+    }
+
+]
+# insert datta to server
+collection.insert_many(list_of_records)    # insert list data
+
+-------------------------------------------------------------------------------------
+
+
+import pymongo
+
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+db = client.test
+print(db)
+
+# creating database
+database = client['product']
+# table creation
+collection = database['product_info']
+
+# dataset
+productInfo =  [
+        {
+            "item": "canvas",
+            "qty": 100,
+            "size": {"h": 28, "w": 35.5, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "journal",
+            "qty": 25,
+            "size": {"h": 14, "w": 21, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "mat",
+            "qty": 85,
+            "size": {"h": 27.9, "w": 35.5, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "mousepad",
+            "qty": 25,
+            "size": {"h": 19, "w": 22.85, "uom": "cm"},
+            "status": "P",
+        },
+        {
+            "item": "notebook",
+            "qty": 50,
+            "size": {"h": 8.5, "w": 11, "uom": "in"},
+            "status": "P",
+        },
+        {
+            "item": "paper",
+            "qty": 100,
+            "size": {"h": 8.5, "w": 11, "uom": "in"},
+            "status": "D",
+        },
+        {
+            "item": "planner",
+            "qty": 75,
+            "size": {"h": 22.85, "w": 30, "uom": "cm"},
+            "status": "D",
+        },
+        {
+            "item": "postcard",
+            "qty": 45,
+            "size": {"h": 10, "w": 15.25, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "sketchbook",
+            "qty": 80,
+            "size": {"h": 14, "w": 21, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "sketch pad",
+            "qty": 95,
+            "size": {"h": 22.85, "w": 30.5, "uom": "cm"},
+            "status": "A",
+        },
+    ]
+# insert data to mongoDB cloud
+collection.insert_many(productInfo)   # list data
+
+# retrive records from database
+record = collection.find()
+for i in record:
+    print(i)
+    
+'''
+# fetch record
+#record = collection.find({'status':'A'})
+#record = collection.find({'status':{'$in':['A' , 'P']}})
+#record = collection.find({'status':{"$gt" : "C"}})
+#record = collection.find({'qty':{'$gte' :75}})
+#record = collection.find({'item': 'sketch pad','qty': 95})
+#record = collection.find({ 'item': 'sketch pad' , 'qty' :{"$gte" : 75}})
+#record = collection.find({'$or' : [{ 'item': 'sketch pad'} , {'qty': {"$gte": 75}}]})
+
+# update record
+#collection.update_one({'item': 'canvas'} , {'$set':{'item': 'sushanta'} })
+'''
+-----------------------------------------------------------------------------------------------
+
+import pymongo
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+db = client.test
+# dataset
+data =  [
+        {
+            "item": "canvas",
+            "qty": 100,
+            "size": {"h": 28, "w": 35.5, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "journal",
+            "qty": 25,
+            "size": {"h": 14, "w": 21, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "mat",
+            "qty": 85,
+            "size": {"h": 27.9, "w": 35.5, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "mousepad",
+            "qty": 25,
+            "size": {"h": 19, "w": 22.85, "uom": "cm"},
+            "status": "P",
+        },
+        {
+            "item": "notebook",
+            "qty": 50,
+            "size": {"h": 8.5, "w": 11, "uom": "in"},
+            "status": "P",
+        },
+        {
+            "item": "paper",
+            "qty": 100,
+            "size": {"h": 8.5, "w": 11, "uom": "in"},
+            "status": "D",
+        },
+        {
+            "item": "planner",
+            "qty": 75,
+            "size": {"h": 22.85, "w": 30, "uom": "cm"},
+            "status": "D",
+        },
+        {
+            "item": "postcard",
+            "qty": 45,
+            "size": {"h": 10, "w": 15.25, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "sketchbook",
+            "qty": 80,
+            "size": {"h": 14, "w": 21, "uom": "cm"},
+            "status": "A",
+        },
+        {
+            "item": "sketch pad",
+            "qty": 95,
+            "size": {"h": 22.85, "w": 30.5, "uom": "cm"},
+            "status": "A",
+        },
+    ]
+
+# creating database
+database = client['inventory']
+#creating table
+collection = database["table"]
+# insert data to table
+collection.insert_many(data)
+
+'''
+# fetch record 
+#record = collection.find({'status':'A'})
+#record = collection.find({'status':{'$in':['A' , 'P']}})
+#record = collection.find({'status':{"$gt" : "C"}})
+#record = collection.find({'qty':{'$gte' :75}})
+#record = collection.find({'item': 'sketch pad','qty': 95})
+#record = collection.find({ 'item': 'sketch pad' , 'qty' :{"$gte" : 75}})
+#record = collection.find({'$or' : [{ 'item': 'sketch pad'} , {'qty': {"$gte": 75}}]})
+# update record
+#collection.update_one({'item': 'canvas'} , {'$set':{'item': 'sushanta'} })
+'''
+# delete record 
+collection.delete_one({'item': 'sushanta'})
+record = collection.find({'item': 'sushanta'})
+for i in record :
+    print(i)
+
+# 
+# $in - operator selects the documents where the value of a field equals any value in the specified array
+# $gt - selects those documents where the value of the field is greater than (i.e. >) the specified value.
+# $gte - selects those documents where the value of the field is greater than equal to (i.e. >=) the specified value.
+# $set - for update
+# $or = search by either this or that items 
+
+---------------------------------------
+# dataset insert 
+
+import pymongo
+import json
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+db = client.test
+# print(db)
+
+database = client['product']
+collection = database['attribute']
+
+with open('attribute2.json') as fp:
+    att_data = json.load(fp)
+#print(att_data)
+collection.insert_one(att_data)
+# insert_one :for json record
+# insert_many :for list record
+print("insert done...")
+-----------------------------------------------------
+# insert dataset operation
+
+import pymongo
+import json
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+db = client.test
+print(db)
+
+database = client['ineuron3']
+collection = database['fitbit3']
+
+# opening file in r mode and load with json
+#with open('fitbit.json', 'r') as fp:
+
+dataset = open('fitbit.json', 'r')
+dataset1 = json.load(dataset)
+#print(dataset1)
+
+# insert dataset
+collection.insert_one(dataset1)
+------------------------------------------------------
+# insert json file into daabase
+
+import pymongo
+import json
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+#db = client.test
+#print(db)
+
+database = client['ineuron2']
+collection = database['fitbit2'] # table creation
+
+# opening file in r mode and load with json
+dataset = open('fitbit.json', 'r')
+dataset2 = json.load(dataset)
+#print(dataset2)
+
+# insert dataset
+collection.insert_one(dataset2)
+
+'''
+# insert_many use when we have list data: 
+dataset2 = json.load(dataset)
+dataset3=[dataset2]
+collection.insert_many(dataset3)
+'''
+--------------------------------------------------------------------------------------------------------
+# fetch data from database
+
+import pymongo
+#import json
+client = pymongo.MongoClient("mongodb+srv://susant:susant123@cluster0.8beoc.mongodb.net/?retryWrites=true&w=majority")
+#db = client.test
+#print(db)
+
+database = client['ineuron2']
+collection = database['fitbit2']
+
+# fetch all records 
+record = collection.find()
+for i in record:
+    print(i)
+
+#fetch a single record 
+record = collection.find({'ID':330987})
+for i in record:
+    print(i)
+
+-----------------------------------------------------------------------------------------
+
+
+
